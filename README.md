@@ -12,7 +12,7 @@ You will be utilizing all of the skills and concepts that you've learned up to t
 1. Handling user events
 1. Factory functions
 1. Data entry/editing
-1. Modular code with Browserify
+1. Modular code with Webpack
 1. Relational data
 
 To start you off, here's an example of what the resources in your API should look like once it's populated with some data from your application.
@@ -55,11 +55,13 @@ To start you off, here's an example of what the resources in your API should loo
 
 ## Professional Requirements
 
-1. All teammates must be using Grunt to run ESLint and Browserify during development
+1. All teammates must be using Webpack to compile their code.
 1. Each module should have a comment at the top with the following info: author(s) and purpose of module
 1. The README for your project should include instructions on how another person can download and run the application
 
 ## How to Handle Authentication
+
+Be very clear that what you will be implemting is not real authentication. It is a simulation of it using very simplistic tools.
 
 You will be using session storage to keep track of which user has logged into Nutshell. When the user fills out the registration form, you will POST their username and password to the `users` collection in your API. You will then immediately take the `id` of the object in the response and save it to session storage.
 
