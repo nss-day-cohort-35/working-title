@@ -8,10 +8,11 @@ You will be utilizing all of the skills and concepts that you've learned up to t
 1. Databases/API
 1. Github
 1. Objects
-1. CSS
+1. CSS/Flexbox
+1. Array methods
 1. Handling user events
 1. Factory functions
-1. Data entry/editing
+1. Implementing CRUD operations
 1. Modular code with Webpack
 1. Relational data
 
@@ -77,6 +78,6 @@ sessionStorage.removeItem("activeUser")
 
 ## Visual Feature List
 
-To help you along, here is a visualization of the features, and behaviors of the application to get you started.
+To help you along, here is a visualization of a few features, as envisioned by one of your predecessors.
 
 ![nutshell features](./Nutshell.png)
