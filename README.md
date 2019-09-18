@@ -69,6 +69,7 @@ To start you off, here's an example of what the resources in your API should loo
 1. All teammates must be using Webpack to compile their code.
 1. Each module should have a comment at the top with the following info: author(s) and purpose of module
 1. The README for your project should include instructions on how another person can download and run the application
+1. An ERD showing the database relationships. A screenshot/image should be included on your README.
 
 ## How to Handle Authentication
 
@@ -91,3 +92,22 @@ sessionStorage.removeItem("activeUser")
 To help you along, here is a visualization of a few features, as envisioned by one of your predecessors.
 
 ![nutshell features](./Nutshell.png)
+
+## Keep in mind some tips for a good usable app
+1. Use acceptable conventions
+   * Logo positioned at top left
+   * Navigation across the top or down the left side
+2. Visual hierarchy
+   * Most important information is the most prominent
+3. Break pages up into defined sections
+   * Logically related content should be related visually
+4. That which is clickable should be obviously clickable.
+5. Eliminate distractions
+   * Use only two typefaces
+   * Limit color pallet (3 colors with black and white)
+   * Use a grid
+6. Support scanning (users don't read)
+   * Use plenty of headings
+   * Short paragraphs
+   * Bulleted lists
+7. Strive for consistency.
