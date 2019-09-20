@@ -1,7 +1,8 @@
-// let friendsProcessor = {
+let friendsProcessor = {
 
-//     go : function {}
-// }
+    go: function () { }
+
+}
 
 
 
