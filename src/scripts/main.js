@@ -3,9 +3,10 @@
     the initial UI to the user. Either the login form should appear
     or the dashboard should be rendered.
 */
+import tasksProcessor from "./tasks/tasksProcessor";
+import newsProcessor from "./news/newsProcessor";
+import messagesProcessor from "./messages/messagesProcessor";
+import friendsProcessor from "./friends/friendsProcessor";
+import authProcessor from "./auth/authProcessor";
+import articleProcessor from "./articles/articleProcessor";
 
-const message = "Time to build an application that gives you all the information you need in a Nutshell"
-
-document.querySelector("#container").innerHTML = `<h1>${message}</h1>`
-
-console.log(message)
