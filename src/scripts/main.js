@@ -1,4 +1,5 @@
 import authProcessor from "./auth/authProcessor";
+import newsProcessor from "./news/newsProcessor";
 
 /*
     Import all the tools into main.js that are needed to display
@@ -56,5 +57,9 @@ authProcessor.Login()
 //             document.querySelector("#welcome").innerHTML = `<h2> Welcome in the website ${newUser.name}</h2>`
 //         })
 
+
+console.log("Starting...");
+
+newsProcessor.start();
 //     }
 // })
