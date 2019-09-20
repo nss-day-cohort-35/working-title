@@ -1,7 +1,7 @@
 let authProcessor = {
 
-    go : function {}
-    
+    go: function () { }
+
 }
 
 

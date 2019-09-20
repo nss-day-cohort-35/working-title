@@ -1,8 +1,8 @@
 
 let tasksProcessor = {
 
-    go : function {}
-    
+    go: function () { }
+
 }
 
 

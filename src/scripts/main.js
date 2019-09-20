@@ -10,3 +10,7 @@ import friendsProcessor from "./friends/friendsProcessor";
 import authProcessor from "./auth/authProcessor";
 import eventsProcessor from "./events/eventsProcessor";
 
+
+console.log("Starting...");
+
+newsProcessor.start();
