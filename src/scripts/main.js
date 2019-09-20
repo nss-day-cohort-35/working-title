@@ -8,5 +8,5 @@ import newsProcessor from "./news/newsProcessor";
 import messagesProcessor from "./messages/messagesProcessor";
 import friendsProcessor from "./friends/friendsProcessor";
 import authProcessor from "./auth/authProcessor";
-import articleProcessor from "./articles/articleProcessor";
+import eventsProcessor from "./events/eventsProcessor";
 
