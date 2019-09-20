@@ -1,4 +1,5 @@
 import authProcessor from "./auth/authProcessor";
+import newsProcessor from "./news/newsProcessor";
 
 /*
     Import all the tools into main.js that are needed to display
