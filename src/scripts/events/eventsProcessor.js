@@ -1,8 +1,7 @@
-let eventsProcessor = {
+// let eventsProcessor = {
 
-    go : function {}
-    
-}
+//     go : function {}
+// }
 
 
 
