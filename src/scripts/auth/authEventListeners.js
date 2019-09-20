@@ -1,7 +1,6 @@
-const createUserObj = (name, username, password) => {
+const createUserObj = (userEmail, password) => {
     const newUser = {
-        name: name,
-        userName: username,
+        userEmail: userEmail,
         password: password
     }
     return newUser
