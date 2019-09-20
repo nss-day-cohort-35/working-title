@@ -1,9 +1,8 @@
 
-let tasksProcessor = {
+// let tasksProcessor = {
 
-    go : function {}
-    
-}
+//     go : function {}
+// }
 
 
 

@@ -1,8 +1,7 @@
-let newsProcessor = {
+// let newsProcessor = {
 
-    go : function {}
-    
-}
+//     go : function {}
+// }
 
 
 
