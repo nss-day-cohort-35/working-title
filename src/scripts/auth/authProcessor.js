@@ -1,4 +1,5 @@
 import createUserObj from "./authEventListeners";
+import API from "./authAPImanager";
 
 const authProcessor = {
     Login: () => {
@@ -35,14 +36,14 @@ const authProcessor = {
             alert("Please enter a valid email address")
         } else {
             // newUser will crete an object with the email, password value
-            let newUser = createUserObj(userEmail, password);
-            API.createUser(newUser).then((user) => {  // response it's a placeholder to call the "users" from JSON database
+            let newUserObj = createUserObj(userEmail, password);
+            API.createUser(newUserObj).then((user) => {  // response it's a placeholder to call the "users" from JSON database
 
 
-                sessionStorage.setItem("activeUser", user.id)   
+                sessionStorage.setItem("activeUser", user.id)
                 //setItem defines the activeUser within the id number belonging to it, from the JSON database.
 
-                document.querySelector("#welcome").innerHTML = `<h2> Welcome in the website ${newUser.name}</h2>`
+                document.querySelector("#authContainer").innerHTML += `<h2> Welcome in the website ${newUserObj.userEmail}</h2>`
             })
 
         }

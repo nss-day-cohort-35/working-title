@@ -9,3 +9,5 @@ const API = {
         }).then (Response => Response.json())
     },
 }
+
+export default API;
