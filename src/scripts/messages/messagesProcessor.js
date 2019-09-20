@@ -1,8 +1,7 @@
-let messagesProcessor = {
+// let messagesProcessor = {
 
-    go : function {}
-
-}
+//     go : function {}
+// }
 
 
 
