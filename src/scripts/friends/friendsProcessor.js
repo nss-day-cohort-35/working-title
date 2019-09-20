@@ -1,7 +1,6 @@
 let friendsProcessor = {
 
     go : function {}
-    
 }
 
 

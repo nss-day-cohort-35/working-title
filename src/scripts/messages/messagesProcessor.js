@@ -1,7 +1,7 @@
 let messagesProcessor = {
 
     go : function {}
-    
+
 }
 
 

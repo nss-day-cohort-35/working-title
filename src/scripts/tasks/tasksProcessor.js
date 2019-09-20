@@ -2,7 +2,7 @@
 let tasksProcessor = {
 
     go : function {}
-    
+
 }
 
 

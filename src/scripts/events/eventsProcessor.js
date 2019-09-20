@@ -1,7 +1,6 @@
 let eventsProcessor = {
 
     go : function {}
-    
 }
 
 

@@ -1,7 +1,7 @@
 let newsProcessor = {
 
     go : function {}
-    
+
 }
 
 
