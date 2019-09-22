@@ -14,7 +14,7 @@ const taskComponentMaker = {
             <fieldset class="inline">
                 <input type="submit" value="Submit" id="taskSubmit">
                 <input type="reset">
-                <input type="hidden" id="idedit" value="" />
+                <input type="hidden" id="taskIdEdit" value="" />
             </fieldset>
         </form>
         <article id="taskSection"></article>
