@@ -3,7 +3,11 @@ import newsProcessor from "./news/newsProcessor";
 import tasksProcessor from "./tasks/tasksProcessor";
 import authInjectDOM from "./auth/authDOMInjector";
 
+//this calls the login page for the user//
 authProcessor.Login()
+
+//this calls the nav buttons, NEED TO ADD IF/ELSE TO CHECK FOR SESSION STORAGE//
+authInjectDOM.addNavtoDOM();
 
 console.log("Starting...");
 
