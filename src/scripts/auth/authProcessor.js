@@ -2,25 +2,14 @@ import createUserObj from "./authEventListeners";
 import API from "./authAPImanager";
 import navComponentMaker from "./authWebComponent";
 import authInjectDOM from "./authDOMInjector";
+import newsProcessor from "../news/newsProcessor";
 
 const authProcessor = {
     signUp: () => {
         console.log("Sign Up function is running")
         let message = "Welcome Puppy Pals, Kitty Kin, and Feathered Friends"
-        document.querySelector("#authContainer").innerHTML = `<h1>${message}</h1>
-    <form>
-        <fieldset>
-            <label for="userEmail">Email:</label>
-                <input type="text" id="userEmail" placeholder="please enter your email">
-            <label for="password">Password:</label>
-                <input type="password" id="password" placeholder="please enter a valid password" autocomplete="on">
-            <label for="passwordConfirm">Re-Enter Password:</label>
-                <input type="password" id="passwordConfirm" placeholder="please re-enter your password" autocomplete="on">
-            <button class="submit" type="button">Sign Up!</button>
-            <button class="loginButton" type="button">Login</button>
-        </fieldset>
-    </form>
-    `
+        document.querySelector("#authContainer").innerHTML += `<h1>${message}</h1>`
+        authInjectDOM.addSignUptoDOM(navComponentMaker.makeSignUp());
         //This is the submit button event listener that checks for passwords//
         document.querySelector("#signUpButton").addEventListener("click", event => {
             // we are checking the value of the name label
@@ -47,7 +36,9 @@ const authProcessor = {
                     //setItem defines the activeUser within the id number belonging to it, from the JSON database and stores it as sessionToken to be used elsewhere//
                     let sessionToken = sessionStorage.getItem("activeUser");
                     console.log("Session Token for current logged in user is:" + sessionToken);
-                    document.querySelector("#authContainer").innerHTML += `<h2> Welcome to the website ${newUserObj.userEmail}</h2>`
+                    authInjectDOM.addNavtoDOM();
+                    document.querySelector("#authContainer").innerHTML = `<h2> Welcome to the website ${newUserObj.userEmail}</h2>`
+                    newsProcessor.start();
                 })
 
             }
