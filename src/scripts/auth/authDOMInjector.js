@@ -14,6 +14,11 @@ const authInjectDOM = {
     addNavtoDOM: () => {
         const navContainer = document.querySelector("#navContainer")
         navContainer.innerHTML = navComponentMaker.makeNavBar();
+    },
+    addLandingtoDOM: () => {
+         let landingContainer = document.querySelector("#landingContainer")
+         console.log(landingContainer)
+         landingContainer.innerHTML = navComponentMaker.makeLandingPage();
     }
 }
 

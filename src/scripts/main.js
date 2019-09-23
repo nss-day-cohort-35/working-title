@@ -4,7 +4,7 @@ import tasksProcessor from "./tasks/tasksProcessor";
 import authInjectDOM from "./auth/authDOMInjector";
 
 //this calls the login page for the user//
-authProcessor.Login()
+authProcessor.Landing()
 
 //this calls the nav buttons, NEED TO ADD IF/ELSE TO CHECK FOR SESSION STORAGE//
 authInjectDOM.addNavtoDOM();
@@ -50,5 +50,5 @@ document.querySelector("#logoutNavbutton").addEventListener("click", event => {
         //need to add something regarding logout, you will clear the session storage//
         // Remove saved data from sessionStorage
         sessionStorage.removeItem("activeUser");
-        authProcessor.Login();
+        authProcessor.signUp();
 })
