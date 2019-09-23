@@ -7,7 +7,7 @@ let newsListeners = {
 
         document.querySelector("#newsSubmit").addEventListener("click", event => {
 
-
+            
 
         })
     }
