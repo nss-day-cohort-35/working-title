@@ -1,17 +1,21 @@
 
 
 let newsDomInjector = {
-    inject: function (thing, target) {
-        document.querySelector(`${target}`).innerHTML += thing;
+    inject: function (object, target) {
+        document.querySelector(`${target}`).innerHTML += object;
     },
 
-    set: function (thing, target) {
-        document.querySelector(`${target}`).innerHTML = thing;
+    set: function (object, target) {
+        document.querySelector(`${target}`).innerHTML = object;
     },
 
-    earase: function (target) {
+    erase: function (target) {
         document.querySelector(`${target}`).innerHTML = "";
+    },
+    replace: function (before, after) {
+        document.querySelector(`${before}`).outerHTML = after;
     }
+
 }
 
 export default newsDomInjector;
