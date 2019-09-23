@@ -48,5 +48,7 @@ document.querySelector("#logoutNavbutton").addEventListener("click", event => {
     console.log("logout Navigational button has been called")
         authInjectDOM.clearContainers();
         //need to add something regarding logout, you will clear the session storage//
+        // Remove saved data from sessionStorage
+        sessionStorage.removeItem("activeUser");
         authProcessor.Login();
 })

@@ -35,15 +35,16 @@ const authProcessor = {
         } else if (userEmail === "") {
             alert("Please enter a valid email address")
         } else {
-            // newUser will crete an object with the email, password value
+            // newUser will create an object with the email, password value
             let newUserObj = createUserObj(userEmail, password);
             API.createUser(newUserObj).then((user) => {  // response it's a placeholder to call the "users" from JSON database
 
 
                 sessionStorage.setItem("activeUser", user.id)
                 //setItem defines the activeUser within the id number belonging to it, from the JSON database.
-
-                document.querySelector("#authContainer").innerHTML += `<h2> Welcome in the website ${newUserObj.userEmail}</h2>`
+                let sessionToken = sessionStorage.getItem("activeUser");
+                console.log("Session Token for current logged in user is:" + sessionToken);
+                document.querySelector("#authContainer").innerHTML += `<h2> Welcome to the website ${newUserObj.userEmail}</h2>`
             })
 
         }
