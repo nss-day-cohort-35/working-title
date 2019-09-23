@@ -31,8 +31,6 @@ const authProcessor = {
                 // newUser will create an object with the email, password value
                 let newUserObj = createUserObj(userEmail, password);
                 API.createUser(newUserObj).then((user) => {  // response it's a placeholder to call the "users" from JSON database
-
-
                     sessionStorage.setItem("activeUser", user.id)
                     //setItem defines the activeUser within the id number belonging to it, from the JSON database and stores it as sessionToken to be used elsewhere//
                     let sessionToken = sessionStorage.getItem("activeUser");
@@ -48,9 +46,11 @@ const authProcessor = {
     },
     Login: () => {
         console.log("Login function has been called")
+        authInjectDOM.addLogintoDOM()
         document.querySelector("#loginButton").addEventListener("click", event => {
-            document.querySelector("#landingContainer").innerHTML = "";
-
+            document.querySelector("#landingContainer").innerHTML = ""
+            let userEmail = document.querySelector("#userEmail").value;
+            let password = document.querySelector("#password").value;
     })},
     Landing: () => {
                 console.log("landing page has been called")

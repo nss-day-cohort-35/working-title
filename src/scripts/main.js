@@ -53,6 +53,7 @@ const navControls = {
             // Remove saved data from sessionStorage
             sessionStorage.removeItem("activeUser");
             authProcessor.Landing();
+            console.log("Session Token for current logged in user is:" + sessionToken);
 })
 }}
 
