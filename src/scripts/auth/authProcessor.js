@@ -61,6 +61,10 @@ const authProcessor = {
     Landing: () => {
                 console.log("landing page has been called")
                 authInjectDOM.addLandingtoDOM();
+                document.querySelector("#landingSignUpButton").addEventListener("click", event => {
+                document.querySelector("#landingContainer").innerHTML = "";
+                authProcessor.signUp();
+                 })
             }
 }
 export default authProcessor;

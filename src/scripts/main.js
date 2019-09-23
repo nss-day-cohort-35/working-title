@@ -7,7 +7,7 @@ import authInjectDOM from "./auth/authDOMInjector";
 authProcessor.Landing()
 
 //this calls the nav buttons, NEED TO ADD IF/ELSE TO CHECK FOR SESSION STORAGE//
-authInjectDOM.addNavtoDOM();
+// authInjectDOM.addNavtoDOM();
 
 console.log("Starting...");
 
