@@ -25,6 +25,11 @@ const authInjectDOM = {
         let signUpContainer = document.querySelector("#authContainer")
         console.log(signUpContainer)
         signUpContainer.innerHTML += navComponentMaker.makeSignUp();
+    },
+    addLogintoDOM: () => {
+        let loginContainer = document.querySelector("#authContainer")
+        console.log(loginContainer)
+        loginContainer.innerHTML += navComponentMaker.makeLogin();
     }
 }
 // const taskContainer = document.querySelector("#taskSection");

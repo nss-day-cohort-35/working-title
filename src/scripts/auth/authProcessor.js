@@ -3,6 +3,7 @@ import API from "./authAPImanager";
 import navComponentMaker from "./authWebComponent";
 import authInjectDOM from "./authDOMInjector";
 import newsProcessor from "../news/newsProcessor";
+import navControls from "../main";
 
 const authProcessor = {
     signUp: () => {
@@ -37,6 +38,7 @@ const authProcessor = {
                     let sessionToken = sessionStorage.getItem("activeUser");
                     console.log("Session Token for current logged in user is:" + sessionToken);
                     authInjectDOM.addNavtoDOM();
+                    navControls.enableNavButtons();
                     document.querySelector("#authContainer").innerHTML = `<h2> Welcome to the website ${newUserObj.userEmail}</h2>`
                     newsProcessor.start();
                 })
@@ -47,15 +49,20 @@ const authProcessor = {
     Login: () => {
         console.log("Login function has been called")
         document.querySelector("#loginButton").addEventListener("click", event => {
-            console.log("PLACEHOLDER")
+            document.querySelector("#landingContainer").innerHTML = "";
+
     })},
     Landing: () => {
                 console.log("landing page has been called")
                 authInjectDOM.addLandingtoDOM();
-                document.querySelector("#landingSignUpButton").addEventListener("click", event => {
-                document.querySelector("#landingContainer").innerHTML = "";
-                authProcessor.signUp();
+                    document.querySelector("#landingSignUpButton").addEventListener("click", event => {
+                        document.querySelector("#landingContainer").innerHTML = "";
+                        authProcessor.signUp();
                  })
+                    document.querySelector("#landingLoginButton").addEventListener("click", event => {
+                        document.querySelector("#landingContainer").innerHTML = "";
+                        authProcessor.Login();
+                     })
             }
 }
 export default authProcessor;
