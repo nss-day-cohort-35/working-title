@@ -1,4 +1,4 @@
-import newsApi from "./newsAPImanager";
+import newsApi from "./newsAPImanager.js";
 
 
 import newsDomInjector from "./newsDomInjector";

@@ -1,7 +1,7 @@
-import newsComponentMaker from "./newsWebComponent";
-import newsApi from "./newsAPImanager";
-import newsDomInjector from "./newsDOMInjector";
-import newsListeners from "./newsEventListeners";
+import newsComponentMaker from "./newsWebComponent.js";
+import newsApi from "./newsAPImanager.js";
+import newsDomInjector from "./newsDOMInjector.js";
+import newsListeners from "./newsEventListeners.js";
 
 let newsProcessor = {
 
