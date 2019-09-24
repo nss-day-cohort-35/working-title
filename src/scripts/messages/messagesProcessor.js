@@ -32,12 +32,12 @@ let messagesProcessor = {
 
         for (let i = 0; i < list.length; i++) {
 
-            if (list[i].userId.toString() === userId.toString()) {//activeUser is the key
+            if (list[i].userId.toString() === userId.toString()) { //activeUser is the key
                 let object = messagesComponentMaker.makeMessagesArticle(list[i]);
 
                 // messagesDomInjector.inject(Thing you want to insert, Where you want to insert it into)
                 messagesDomInjector.inject(object, "#messagesSection");
-            }//this space is reserved for checking all friend objects and populating as if it's from the usser
+            } //this space is reserved for checking all friend objects and populating as if it's from the usser
 
 
         }

@@ -1,7 +1,7 @@
 let messagesApi = {
 
-    saveChat: function (entry) {
-        return fetch("http://localhost:8088/news", { // save to list "entries"
+    saveEntry: function (entry) {
+        return fetch("http://localhost:8088/messages", { // save to list "entries"
             method: "POST",
             headers: {
                 //'Accept': 'application/json',
@@ -14,7 +14,7 @@ let messagesApi = {
 
     getEntries: function () {
         console.log("Getting entries");
-        return fetch("http://localhost:8088/messages?_expand=users").then(entrieslist => entrieslist.json())
+        return fetch("http://localhost:8088/messages/").then(entrieslist => entrieslist.json())
 
     },
 
