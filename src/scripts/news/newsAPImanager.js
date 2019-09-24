@@ -16,7 +16,7 @@ let newsApi = {
         console.log("Getting entries");
         return fetch("http://localhost:8088/news").then(entrieslist => entrieslist.json())
     },
-
+   
     removeEntry: function (remove) {
 
         return fetch(`http://localhost:8088/news/${remove}`, {
