@@ -1,4 +1,4 @@
-import navComponentMaker from "./authWebComponent"
+import navComponentMaker from "./authWebComponent.js"
 
 const authInjectDOM = {
     clearContainers: () => {

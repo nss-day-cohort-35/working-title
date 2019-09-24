@@ -8,6 +8,14 @@ const API = {
             body: JSON.stringify(user)
         }).then (Response => Response.json())
     },
+    getSpecificUser: (id) => {
+        return fetch(`http://localhost:8088/users/${id}`)
+            .then(response => response.json())
+    },
+    getUserbyEmail: (userEmail) => {
+        return fetch(`http://localhost:8088/users?userEmail=${userEmail}`)
+        .then(response => response.json())
+    }
 }
 
 export default API;
