@@ -1,9 +1,9 @@
-import createUserObj from "./authEventListeners";
-import API from "./authAPImanager";
-import navComponentMaker from "./authWebComponent";
-import authInjectDOM from "./authDOMInjector";
-import newsProcessor from "../news/newsProcessor";
-import navControls from "../main";
+import createUserObj from "./authEventListeners.js";
+import API from "./authAPImanager.js";
+import navComponentMaker from "./authWebComponent.js";
+import authInjectDOM from "./authDOMInjector.js";
+import newsProcessor from "../news/newsProcessor.js";
+import navControls from "../main.js";
 
 const authProcessor = {
     signUp: () => {
@@ -49,20 +49,45 @@ const authProcessor = {
         authInjectDOM.addLogintoDOM()
         document.querySelector("#loginButton").addEventListener("click", event => {
             document.querySelector("#landingContainer").innerHTML = ""
-            let userEmail = document.querySelector("#userEmail").value;
-            let password = document.querySelector("#password").value;
-    })},
+            let userEmail = document.querySelector("#loginUserEmail").value;
+            let userPassword = document.querySelector("#loginPassword").value;
+            API.getUserbyEmail(userEmail)
+                .then(response => {
+                    if (response.length === 0) {
+                        alert("Please enter a valid User Email.")
+                    } else if (response.length === 1 && response[0].password !== userPassword) {
+                        alert("Password is incorrect, please try again.")
+                        // starting the if statement to check for empty fields//
+                    } else if (userPassword === "") {
+                        alert("Please fill the Password Form")
+                    } else if (userEmail === "") {
+                        alert("Please enter a valid email address")
+                    } else if (response[0].password === userPassword) {
+                        sessionStorage.setItem("activeUser", response[0].id)
+                        //setItem defines the activeUser within the id number belonging to it, from the JSON database and stores it as sessionToken to be used elsewhere//
+                        let sessionToken = sessionStorage.getItem("activeUser");
+                        console.log("Session Token for current logged in user is:" + sessionToken);
+                        authInjectDOM.addNavtoDOM();
+                        navControls.enableNavButtons();
+                        document.querySelector("#authContainer").innerHTML = `<h2> Welcome to the website ${response[0].userEmail}</h2>`
+                        newsProcessor.start();
+                    }
+                })
+
+        }
+        )
+    },
     Landing: () => {
-                console.log("landing page has been called")
-                authInjectDOM.addLandingtoDOM();
-                    document.querySelector("#landingSignUpButton").addEventListener("click", event => {
-                        document.querySelector("#landingContainer").innerHTML = "";
-                        authProcessor.signUp();
-                 })
-                    document.querySelector("#landingLoginButton").addEventListener("click", event => {
-                        document.querySelector("#landingContainer").innerHTML = "";
-                        authProcessor.Login();
-                     })
-            }
+        console.log("landing page has been called")
+        authInjectDOM.addLandingtoDOM();
+        document.querySelector("#landingSignUpButton").addEventListener("click", event => {
+            document.querySelector("#landingContainer").innerHTML = "";
+            authProcessor.signUp();
+        })
+        document.querySelector("#landingLoginButton").addEventListener("click", event => {
+            document.querySelector("#landingContainer").innerHTML = "";
+            authProcessor.Login();
+        })
+    }
 }
 export default authProcessor;
