@@ -18,7 +18,7 @@ let tasksListeners = {
                 }
                 console.log(submitTaskObj);
                 tasksApi.saveTask(submitTaskObj).then(() => {
-                    // document.querySelector("taskResultSection").innerHTML = ""
+                    document.querySelector("#taskResultSection").innerHTML = ""
                     tasksApi.getTask(sessionToken)
                     .then(data => tasksInjectDOM.addResultsToDOM(data));
                 })

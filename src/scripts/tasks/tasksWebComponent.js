@@ -26,7 +26,7 @@ const taskComponentMaker = {
             <div id="editTask--${task.id}">
                 <h3>${task.name}</h3>
             </div>
-            <p>${task.date}</p>
+            <p>Expected Completion Date: ${task.date}</p>
             <fieldset>
                 <label for="taskComplete">Click if task is complete</label>
                 <input type="checkbox" name="taskComplete" id="taskComplete" value="${task.complete}">

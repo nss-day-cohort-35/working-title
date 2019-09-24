@@ -10,13 +10,16 @@ let tasksProcessor = {
         console.log("task start is running")
         let userId = sessionStorage.getItem("activeUser")
         tasksInjectDOM.addFormToDOM(taskComponentMaker.makeTaskSection());
-        tasksApi.getTask(userId).then(tasks => {
-            console.log("render tasks is running")
-            tasksApi.getTask().then(data => tasksInjectDOM.addResultsToDOM(data));
+        let sessionToken = sessionStorage.getItem("activeUser")
+        tasksApi.getTask(sessionToken)
+            .then(data => tasksInjectDOM.addResultsToDOM(data));
+        // tasksApi.getTask(userId).then(tasks => {
+        //     console.log("render tasks is running")
+        //     tasksApi.getTask().then(data => tasksInjectDOM.addResultsToDOM(data));
             tasksListeners.taskSubmit();
-        })
+        }
     }
-}
+
     // calling the API and getting all tasks and posting to the DOM.
     // renderTasks: function () {
     //     console.log("render tasks is running")
