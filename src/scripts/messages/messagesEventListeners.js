@@ -16,7 +16,7 @@ let messagesListeners = {
         document.querySelector("#timeoutVar2").value === ""
       ) {
         let submitData = {
-          date: moment().format("lll"),
+          date: 10, /*moment().format("lll"),*/
           userId: sessionStorage.getItem("activeUser"),
           text: document.querySelector("#messagesText").value
         };

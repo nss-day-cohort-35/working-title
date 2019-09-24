@@ -21,9 +21,9 @@ let messagesApi = {
 
     removeEntry: function (remove) {
 
-        return fetch(`http://localhost:8088/messages?_expand=user${remove}`, {
+        return fetch(`http://localhost:8088/messages/${remove}`, {
             method: "DELETE"
-        })
+        }).then(entrieslist => entrieslist.json())
 
     },
 
