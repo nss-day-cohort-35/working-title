@@ -12,15 +12,15 @@ const taskComponentMaker = {
                 <input type="text" name="taskName" id="taskName" required>
             </fieldset>
             <fieldset class="inline">
-                <input type="submit" value="Submit" id="taskSubmit">
-                <input type="reset">
+                <button type="button" id="taskSubmit">Submit Task</button>
                 <input type="hidden" id="taskIdEdit" value="" />
             </fieldset>
         </form>
-        <article id="taskSection"></article>
+        <article id="taskResultSection"></article>
         `
     },
     makeTaskResults: function (task) {
+        console.log("Make Task Results have been called");
         return `
         <section id="tasksResultContainer">
             <div id="editTask--${task.id}">
@@ -32,6 +32,7 @@ const taskComponentMaker = {
                 <input type="checkbox" name="taskComplete" id="taskComplete" value="${task.complete}">
             </fieldset>
             <button type="button" id="deleteTask--${task.id}">Delete Task</button>
+            <button type="button" id="editTask--${task.id}">Edit Task</button>
         </section>
         `
     }

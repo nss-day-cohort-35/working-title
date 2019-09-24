@@ -1,12 +1,13 @@
 const tasksApi = {
-    getTask: () => {
-        return fetch("http://localhost:8088/tasks?_sort=date&_order=desc")
+    getTask: userId => {
+        return fetch(`http://localhost:8088/tasks/?userId=${userId}&_sort=date&_order=desc&_expand=user`)
             .then(response =>
                 response.json()
             );
     },
     saveTask: task => {
-        return fetch("http://localhost:8088/tasks", {
+        //don't need to find ID because it's being called in session storage in the array.
+        return fetch("http://localhost:8088/tasks?_expand=user", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -15,7 +16,7 @@ const tasksApi = {
         });
     },
     deleteTask: id => {
-        return fetch(`http://localhost:8088/tasks/${id}`, {
+        return fetch(`http://localhost:8088/tasks/${id}?_expand=user`, {
             method: "DELETE"
         }).then(response => response.json())
     },
@@ -23,7 +24,7 @@ const tasksApi = {
         // const taskUpdateObj = {
         //     name: document.querySelector("#tasksResultContainer").value
         // }
-        return fetch(`http://localhost:8088/tasks/${id}`, {
+        return fetch(`http://localhost:8088/tasks/${id}?_expand=user`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json"
@@ -32,7 +33,7 @@ const tasksApi = {
         }).then(response => response.json())
     },
     getSpecificTask: (id) => {
-        return fetch(`http://localhost:8088/tasks/${id}`)
+        return fetch(`http://localhost:8088/tasks/${id}?_expand=user`)
             .then(response => response.json())
     }
 };
