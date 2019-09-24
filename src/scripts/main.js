@@ -52,6 +52,7 @@ const navControls = {
             //need to add something regarding logout, you will clear the session storage//
             // Remove saved data from sessionStorage
             sessionStorage.removeItem("activeUser");
+            document.querySelector("#navContainer").innerHTML = "";
             authProcessor.Landing();
             console.log("Session Token for current logged in user is:" + sessionToken);
 })
