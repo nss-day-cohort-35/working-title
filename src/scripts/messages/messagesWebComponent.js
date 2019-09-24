@@ -35,7 +35,7 @@ const messagesComponentMaker = {
             <div class="inline">
             <h5 class="margin">${object.date}
             </h5>
-            <h3 id="messagesEmail${object.id}">${object.userId}</h3>
+            <h3 id="messagesEmail${object.id}">${object.user.userEmail}</h3>
             <p class="margin"> - </p> 
             <p id="messagesText${object.id}">${object.text}</p>
             </div>

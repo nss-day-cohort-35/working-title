@@ -37,7 +37,7 @@ let messagesProcessor = {
 
                 // messagesDomInjector.inject(Thing you want to insert, Where you want to insert it into)
                 messagesDomInjector.inject(object, "#messagesSection");
-            } //this space is reserved for checking all friend objects and populating as if it's from the usser
+            } //this space is reserved for checking all friend objects and populating as if it's from the user
 
 
         }

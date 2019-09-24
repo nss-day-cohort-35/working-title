@@ -14,14 +14,14 @@ let messagesApi = {
 
     getEntries: function () {
         console.log("Getting entries");
-        return fetch("http://localhost:8088/messages/").then(entrieslist => entrieslist.json())
+        return fetch("http://localhost:8088/messages?_expand=user").then(entrieslist => entrieslist.json())
 
     },
 
 
     removeEntry: function (remove) {
 
-        return fetch(`http://localhost:8088/messages/${remove}`, {
+        return fetch(`http://localhost:8088/messages?_expand=user${remove}`, {
             method: "DELETE"
         })
 
