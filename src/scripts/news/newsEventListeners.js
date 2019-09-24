@@ -1,4 +1,4 @@
-import newsApi from "./newsAPImanager";
+import newsApi from "./newsAPImanager.js";
 
 
 import newsDomInjector from "./newsDomInjector";
@@ -20,7 +20,7 @@ let newsListeners = {
             console.log("Submitting");
             if (document.querySelector("#idEdit").value === "" && document.querySelector("#timeoutVar").value === "") {
 
-                let sumbitdata = {
+                let submitData = {
                     date: document.querySelector("#newsDate").value,
                     userId: sessionStorage.getItem("activeUser"),
                     title: document.querySelector("#newsTitle").value,
@@ -29,15 +29,15 @@ let newsListeners = {
 
                 }
 
-                newsApi.saveEntry(sumbitdata).then(function(uselessdata) {newsApi.getEntries().then(data => newsProcessor.handleNews(data))});
+                newsApi.saveEntry(submitData).then(function(uselessdata) {newsApi.getEntries().then(data => newsProcessor.handleNews(data))});
                 //note to self: .then(randomvarname => unrelatedfunction(lol)) does not work, have to use
                 // .then(function(randomvarname) {unrelatedfunction(lol)}) instead. Put this in the capstone site's data.
 
-                //newsDomInjector.inject(newsComponentMaker.makeUneditableNewsArticle(sumbitdata) ,"#newsSection");
+                //newsDomInjector.inject(newsComponentMaker.makeUneditableNewsArticle(submitData) ,"#newsSection");
 
             } else {
 
-                let sumbitdata = {
+                let submitData = {
                     date: document.querySelector("#newsDate").value,
                     userId: sessionStorage.getItem("activeUser"),
                     title: document.querySelector("#newsTitle").value,
@@ -47,15 +47,15 @@ let newsListeners = {
 
                 }
 
-                let savedid = document.querySelector("#idEdit").value;
+                let savedId = document.querySelector("#idEdit").value;
 
                 document.querySelector(".newsIdentifier").innerHTML = "New News Entry"; // set the headline to tell user that they are no longer editing
                 document.querySelector("#newsSubmit").innerHTML = "Submit"; // set the save button's text to reflect the no longer editing state
                 document.querySelector("#idEdit").value = "";
 
-                newsApi.editEntry(sumbitdata, savedid).then(function(uselessdata) {newsApi.getEntries().then(data => newsProcessor.handleNews(data))});
+                newsApi.editEntry(submitData, savedId).then(function(uselessdata) {newsApi.getEntries().then(data => newsProcessor.handleNews(data))});
 
-                //newsDomInjector.replace(`#section${savedid}`,newsComponentMaker.makeUneditableNewsArticle(sumbitdata));
+                //newsDomInjector.replace(`#section${savedId}`,newsComponentMaker.makeUneditableNewsArticle(submitData));
 
 
             }
@@ -64,29 +64,29 @@ let newsListeners = {
         })
 
 
-        let dellist = document.querySelectorAll(".newsDelete");
-        console.log(dellist);
-        let editlist = document.querySelectorAll(".newsEdit");
-        console.log(editlist);
+        let delList = document.querySelectorAll(".newsDelete");
+        console.log(delList);
+        let editList = document.querySelectorAll(".newsEdit");
+        console.log(editList);
 
-        for (let i = 0; i < dellist.length; i++) {
+        for (let i = 0; i < delList.length; i++) {
 
-            dellist[i].addEventListener("click", event => {
+            delList[i].addEventListener("click", event => {
 
                 console.log("Deleting:");
-                console.log(dellist[i].value);
+                console.log(delList[i].value);
 
-                newsApi.removeEntry(dellist[i].value).then(function(uselessdata) {newsApi.getEntries().then(data => newsProcessor.handleNews(data))})
+                newsApi.removeEntry(delList[i].value).then(function(uselessdata) {newsApi.getEntries().then(data => newsProcessor.handleNews(data))})
 
 
 
 
             })
 
-            editlist[i].addEventListener("click", event => {
+            editList[i].addEventListener("click", event => {
 
-                if (sessionStorage.getItem("activeUser") === editlist[i].value) {
-                    this.editEntry(dellist[i].value);
+                if (sessionStorage.getItem("activeUser") === editList[i].value) {
+                    this.editEntry(delList[i].value);
                 }
 
 

@@ -2,6 +2,7 @@ import authProcessor from "./auth/authProcessor";
 import newsProcessor from "./news/newsProcessor";
 import tasksProcessor from "./tasks/tasksProcessor";
 import authInjectDOM from "./auth/authDOMInjector";
+import messagesProcessor from "./messages/messagesProcessor.js"
 
 //this calls the login page for the user//
 authProcessor.Landing();
