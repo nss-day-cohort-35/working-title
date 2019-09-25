@@ -1,9 +1,10 @@
-import newsApi from "./newsAPI";
+import newsApi from "./newsAPIManager";
 
 
 
 
 import newsProcessor from "./newsProcessor";
+import newsApiManager from "./newsAPIManager";
 
 /* This component deals with giving elements functionality.
 There are three methods, each of which you want to use like so:
@@ -30,7 +31,7 @@ input that is located inside the input form.
 
 */
 
-let newsListeners = {
+let newsEventListeners = {
 
     makeButtonListeners: function () {
         document.querySelector("#news-submit-button").addEventListener("click", function (event) {
@@ -74,7 +75,7 @@ let newsListeners = {
                 document.querySelector("#news-id-edit-value").value = "";
 
                 newsApi.editEntry(sumbitdata, savedid)
-                    .then(() => newsApi.getEntries())
+                    .then(() => newsApiManager.getEntries())
                     .then(data => newsProcessor.handleNews(data))
 
 
@@ -98,9 +99,9 @@ let newsListeners = {
 
             delblist[i].addEventListener("click", event => {
 
-                newsApi.removeEntry(delblist[i].value) // #4
-                    .then(() => newsApi.getEntries())
-                    .then(data => newsProcessor.handleNews(data))
+                newsApiManager.removeEntry(delblist[i].value) // #4
+                .then(() => newsApi.getEntries())
+                .then(data => newsProcessor.handleNews(data))
 
 
 
@@ -134,5 +135,5 @@ let newsListeners = {
 
 }
 
-export default newsListeners;
+export default newsEventListeners;
 

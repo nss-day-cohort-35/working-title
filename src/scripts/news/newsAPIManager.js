@@ -13,7 +13,7 @@ the argument "id" was, with "entry".
 
 */
 
-let newsApi = {
+let newsApiManager = {
 
     saveEntry: function (entry) {
         return fetch("http://localhost:8088/news", {
@@ -51,4 +51,4 @@ let newsApi = {
     }
 }
 
-export default newsApi;
+export default newsApiManager;

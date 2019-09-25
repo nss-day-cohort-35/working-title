@@ -1,7 +1,7 @@
-import newsComponentMaker from "./newsComponentMaker";
-import newsApi from "./newsAPI";
+import newsWebComponent from "./newsWebComponent";
+import newsAPIManager from "./newsAPIManager";
 import newsDomInjector from "./newsDOMInjector";
-import newsListeners from "./newsListeners";
+import newsEventListeners from "./newsEventListeners";
 
 /*  This is newsProcessor. It manages and processes the other news - prefixed .js files. As such it has all of them
 imported.
@@ -25,9 +25,9 @@ Edit buttons functionality.
 let newsProcessor = {
 
     start: function () {
-        newsDomInjector.set(newsComponentMaker.makeNewsSection(), "#news-container"); // #1
-        newsListeners.makeButtonListeners(); // #2
-        newsApi.getEntries().then(entries => this.handleNews(entries)); // #3
+        newsDomInjector.set(newsWebComponent.makeNewsArticle(), "#news-container"); // #1
+        newsEventListeners.makeButtonListeners(); // #2
+        newsAPIManager.getEntries().then(entries => this.handleNews(entries)); // #3
 
     },
 
@@ -46,16 +46,19 @@ let newsProcessor = {
         for (let i = 0; i < list.length; i++) {
 
             if (list[i].userId.toString() === userid.toString()) { // #6
-                let object = newsComponentMaker.makeNewsArticle(list[i]);
 
+                console.log("Processing:");
+                console.log(list[i]);
 
+                let object = newsWebComponent.makeNewsArticle(list[i]);
                 newsDomInjector.inject(object, "#news-section"); // #7
+
             }
 
 
         }
 
-        newsListeners.makeModularButtonListeners(); // #8
+        newsEventListeners.makeModularButtonListeners(); // #8
 
 
 

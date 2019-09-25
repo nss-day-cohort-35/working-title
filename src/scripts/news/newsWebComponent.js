@@ -13,7 +13,7 @@ formated correctly.
 
 */
 
-const newsComponentMaker = {
+const newsWebComponent = {
     makeNewsSection: function () {
         return `
         <form id="news-form">
@@ -65,4 +65,4 @@ const newsComponentMaker = {
 
 }
 
-export default newsComponentMaker;
+export default newsWebComponent;
