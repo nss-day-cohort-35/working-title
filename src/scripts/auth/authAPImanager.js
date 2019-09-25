@@ -1,4 +1,4 @@
-const API = {
+const authAPIManager = {
     createUser(user) {
         return fetch("http://localhost:8088/users", {
             method: "POST",
@@ -18,4 +18,4 @@ const API = {
     }
 }
 
-export default API;
+export default authAPIManager;

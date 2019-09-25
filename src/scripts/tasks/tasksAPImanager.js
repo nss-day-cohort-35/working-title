@@ -1,4 +1,4 @@
-const tasksApi = {
+const tasksAPIManager = {
     getTask: userId => {
         return fetch(`http://localhost:8088/tasks/?userId=${userId}&_sort=date&_order=desc&_expand=user`)
             .then(response =>
@@ -22,7 +22,7 @@ const tasksApi = {
     },
     editTask: id => {
         // const taskUpdateObj = {
-        //     name: document.querySelector("#tasksResultContainer").value
+        //     name: document.querySelector("#").value
         // }
         return fetch(`http://localhost:8088/tasks/${id}?_expand=user`, {
             method: "PATCH",
@@ -38,4 +38,4 @@ const tasksApi = {
     }
 };
 
-export default tasksApi;
+export default tasksAPIManager;

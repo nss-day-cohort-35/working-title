@@ -101,7 +101,7 @@ let newsListeners = {
     },
 
     editEntry: function (id) {
-
+        //value in the results                             targeting the container to be injected into the form//
         document.querySelector("#newsDate").value = document.querySelector(`#newsDate${id}`).innerHTML;
         document.querySelector("#newsTitle").value = document.querySelector(`#newsTitle${id}`).innerHTML;
         document.querySelector("#newsSummary").value = document.querySelector(`#newsSummary${id}`).innerHTML;
