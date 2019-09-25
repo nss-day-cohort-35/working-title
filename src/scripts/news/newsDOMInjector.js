@@ -1,4 +1,17 @@
+/* This component deals with working with the DOM.
+There are four methods, each of which you want to use like so:
 
+newsDomInjector.inject(object, target) Object is the thing you want to put into Target's InnerHTML.
+
+newsDomInjector.set(object, target) Object is the thing you want to replace Target's InnerHTML.
+
+newsDomInjector.erase(target) Target's InnerHtml will be erased.
+
+newsDomInjector.replace(before, after) Before is going to replace After.
+
+
+
+*/
 
 let newsDomInjector = {
     inject: function (object, target) {
