@@ -23,7 +23,7 @@ const newsComponentMaker = {
         <fieldset class="inline">
 
             <button id="newsSubmit">Submit</button>
-            <input type="reset">
+            <input type="reset" value="Reset"/>
             <input type="hidden" id="idEdit" value="" />
 
 
@@ -32,8 +32,6 @@ const newsComponentMaker = {
 
     <article id = "newsSection">
     </article>
-    
-    <input type="hidden" id="timeoutVar" value=""/>
         
         `;
     },
