@@ -47,9 +47,6 @@ let newsProcessor = {
 
             if (list[i].userId.toString() === userid.toString()) { // #6
 
-                console.log("Processing:");
-                console.log(list[i]);
-
                 let object = newsWebComponent.makeNewsArticle(list[i]);
                 newsDomInjector.inject(object, "#news-section"); // #7
 

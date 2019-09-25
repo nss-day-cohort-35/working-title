@@ -53,7 +53,7 @@ let newsEventListeners = {
 
 
                 newsApi.saveEntry(sumbitdata)
-                    .then(() => newsApi.getEntries())
+                    .then(() => newsApiManager.getEntries())
                     .then(data => newsProcessor.handleNews(data))
 
             } else {
@@ -100,8 +100,8 @@ let newsEventListeners = {
             delblist[i].addEventListener("click", event => {
 
                 newsApiManager.removeEntry(delblist[i].value) // #4
-                .then(() => newsApi.getEntries())
-                .then(data => newsProcessor.handleNews(data))
+                    .then(() => newsApiManager.getEntries())
+                    .then(data => newsProcessor.handleNews(data))
 
 
 
