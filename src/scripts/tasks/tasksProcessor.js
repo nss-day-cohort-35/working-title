@@ -9,7 +9,7 @@ let tasksProcessor = {
     start: () => {
         console.log("task start is running")
         let userId = sessionStorage.getItem("activeUser")
-        tasksDOMInjector.addFormToDOM(tasksWebComponent.makeTaskSection());
+        tasksDOMInjector.addFormToDOM(tasksWebComponent.makeTaskInputForm());
         let sessionToken = sessionStorage.getItem("activeUser")
         tasksAPIManager.getTask(sessionToken)
             .then(data => tasksDOMInjector.addResultsToDOM(data));
