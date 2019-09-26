@@ -11,14 +11,15 @@ import newsComponentMaker from "./newsWebComponent";
 let newsListeners = {
 
     makeButtons: function () {
-
         document.querySelector("#newsSubmit").addEventListener("click", function (e) {
 
             e.preventDefault();
 
-            // submit button
             console.log("Submitting");
-            if (document.querySelector("#idEdit").value === "" && document.querySelector("#timeoutVar").value === "") {
+            if (document.querySelector("#idEdit").value === "") {
+                // this checks if the storage for the editing id is empty, plus if the fecth is done (becuase of bug)
+
+                console.log("Saving!");
 
                 let submitData = {
                     date: document.querySelector("#newsDate").value,
@@ -62,6 +63,11 @@ let newsListeners = {
 
 
         })
+
+    },
+
+
+    makeModularButtons: function () {
 
 
         let delList = document.querySelectorAll(".newsDelete");

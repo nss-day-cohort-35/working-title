@@ -11,12 +11,12 @@ let messagesEventListeners = {
   submitButton: () => {
     document.querySelector("#messages-submit-button").addEventListener("click", e => {
       e.preventDefault();
-      document.querySelector("#messagesText").value = "";
-      if (document.querySelector("#idMessagesEdit").value === "") {
+      document.querySelector("#messages-text").value = "";
+      if (document.querySelector("#id-messages-edit").value === "") {
         let submitData = {
           date: moment().format("lll"),
           userId: sessionToken,
-          text: document.querySelector("#messagesText").value
+          text: document.querySelector("#messages-text").value
         };
 
         messagesAPIManager.saveMessage(submitData).then(response => {
@@ -26,7 +26,7 @@ let messagesEventListeners = {
         });
       } else {
         let submitData = {
-          id: document.querySelector("#idMessagesEdit").value,
+          id: document.querySelector("#id-messagesEdit").value,
           userId: sessionStorage.getItem("activeUser"),
           text: document.querySelector("#messagesText ").value,
           date: document.querySelector("messagesDate").value

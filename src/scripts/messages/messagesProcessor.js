@@ -7,15 +7,15 @@ import messagesEventListeners from "./messagesEventListeners.js";
 let messagesProcessor = {
 
     start: () => {
-        messagesDomInjector.set(messagesComponentMaker.makeMessagesSection(), "#messagesContainer");
+        messagesDomInjector.set(messagesComponentMaker.makeMessagesSection(), "#messages-container");
         messagesEventListeners.submitButton()
-        messagesAPIManager.getMessages().then(response => this.handleMessages());
+        messagesAPIManager.getMessages().then(response => this.handleMessages(response));
 
     },
 
     handleMessages: (list) => {
 
-        messagesDomInjector.erase("#messagesSection");
+        messagesDomInjector.erase("#messages-section");
 
         let userId = sessionStorage.getItem("activeUser");
 
@@ -30,7 +30,7 @@ let messagesProcessor = {
         for (let i = 0; i < list.length; i++) {
 
             let object = messagesComponentMaker.makeMessagesArticle(list[i]);
-            messagesDomInjector.inject(object, "#messagesSection");
+            messagesDomInjector.inject(object, "#messages-section");
         }
         messagesEventListeners.deleteEditButtons();
     }

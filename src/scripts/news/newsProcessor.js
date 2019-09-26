@@ -7,13 +7,12 @@ let newsProcessor = {
 
     start: function () {
         newsDomInjector.set(newsComponentMaker.makeNewsSection(), "#newsContainer");
+        newsListeners.makeButtons();
         newsApi.getEntries().then(entries => this.handleNews(entries));
 
     },
 
     handleNews: function (list) {
-
-        document.querySelector("#timeoutVar").value = "!";
 
         console.log("Processing this list:");
         console.log(list);
@@ -32,18 +31,18 @@ let newsProcessor = {
 
         for (let i = 0; i < list.length; i++) {
 
-            if (list[i].userId.toString() === userid.toString()) {//activeUser is the key
+            if (list[i].userId.toString() === userid.toString()) { //activeUser is the key
                 let object = newsComponentMaker.makeNewsArticle(list[i]);
 
                 // newsDomInjector.inject(Thing you want to insert, Where you want to insert it into)
                 newsDomInjector.inject(object, "#newsSection");
-            }//this space is reserved for checking all freind objects and populating as if it's from the usser
+            } //this space is reserved for checking all freind objects and populating as if it's from the usser
 
 
         }
 
-        newsListeners.makeButtons();
-        document.querySelector("#timeoutVar").value = "";
+        newsListeners.makeModularButtons();
+
 
 
     }
