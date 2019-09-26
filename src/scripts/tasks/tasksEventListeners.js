@@ -16,6 +16,7 @@ let tasksEventListeners = {
                     //this is where we're getting the UserId, not in the fetch URL.
                     userId: sessionToken,
                     name: document.querySelector("#tasks-name-input").value,
+                    complete: false
                 }
                 console.log(submitTaskObj);
                 tasksAPIManager.saveTask(submitTaskObj).then(() => {
@@ -40,21 +41,20 @@ let tasksEventListeners = {
             } else if (event.target.id.startsWith("#edit-task--")) {
                 console.log("edit", event.target.id.split("--")[1])
                 editForm(event.target.id.split("--")[1])
-
-                const editForm = (entryID) => {
-                    const editEntryID = document.querySelector("#entryId")
-                    const editConcept = document.querySelector("#entryConcept")
-                    const editDate = document.querySelector("#entryDate")
-                    const editContent = document.querySelector("#entryContent")
-                    const editMood = document.querySelector("#entryMood")
-                    //
-                    API.getSpecificEntry(entryID)
+                   tasksAPIManager.getSpecificTask(taskId)
                     .then(response => {
                         editEntryID.value = entryId;
                         editConcept.value = response.concept;
                         editDate.value = response.date;
                         editContent.value = response.content;
                         editMood.value = response.mood;
+//this is the querying the containers for the form at top of the page and setting them to the values from json
+                    const editForm = (taskId) => {
+                    let editUserId  = sessionToken
+                    let editId = document.querySelector("#")
+                    let editDate = document.querySelector("#")
+                    let editName = document.querySelector("#")
+                    //
                     })
                 }
 

@@ -1,3 +1,5 @@
+// This is the page that will call the API calls for the authentication
+
 const authAPIManager = {
     createUser(user) {
         return fetch("http://localhost:8088/users", {
