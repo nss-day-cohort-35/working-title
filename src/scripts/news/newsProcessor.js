@@ -13,8 +13,6 @@ let newsProcessor = {
 
     handleNews: function (list) {
 
-        document.querySelector("#timeoutVar").value = "!";
-
         console.log("Processing this list:");
         console.log(list);
 
@@ -42,8 +40,7 @@ let newsProcessor = {
 
         }
 
-        newsListeners.makeButtons();
-        document.querySelector("#timeoutVar").value = "";
+        newsListeners.makeModularButtons();
 
 
     }
