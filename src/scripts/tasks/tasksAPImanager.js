@@ -1,4 +1,4 @@
-const tasksApi = {
+const tasksAPIManager = {
     getTask: userId => {
         return fetch(`http://localhost:8088/tasks/?userId=${userId}&_sort=date&_order=desc&_expand=user`)
             .then(response =>
@@ -20,12 +20,9 @@ const tasksApi = {
             method: "DELETE"
         }).then(response => response.json())
     },
-    editTask: id => {
-        // const taskUpdateObj = {
-        //     name: document.querySelector("#tasksResultContainer").value
-        // }
+    editTask: (id, taskUpdateObj) => {
         return fetch(`http://localhost:8088/tasks/${id}?_expand=user`, {
-            method: "PATCH",
+            method: "PUT",
             headers: {
                 "Content-Type": "application/json"
             },
@@ -33,9 +30,9 @@ const tasksApi = {
         }).then(response => response.json())
     },
     getSpecificTask: (id) => {
-        return fetch(`http://localhost:8088/tasks/${id}?_expand=user`)
+        return fetch(`http://localhost:8088/tasks/${id}`)
             .then(response => response.json())
     }
 };
 
-export default tasksApi;
+export default tasksAPIManager;

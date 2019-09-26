@@ -1,17 +1,17 @@
 import taskComponentMaker from "./tasksWebComponent.js";
 
-const tasksInjectDOM = {
+const tasksDOMInjector = {
     addFormToDOM: () => {
-        document.querySelector("#tasksContainer").innerHTML += taskComponentMaker.makeTaskSection();
+        document.querySelector("#tasks-container").innerHTML += taskComponentMaker.makeTaskInputForm();
     },
-    addResultsToDOM: function (tasks){
+    addResultsToDOM: (tasks) => {
         console.log("add results to dom is being called")
-        tasks.forEach(item => {
-            const taskContainer = document.querySelector("#taskResultSection");
-            taskContainer.innerHTML += taskComponentMaker.makeTaskResults(item);
+        tasks.forEach(task => {
+            const taskContainer = document.querySelector("#tasks-results-container");
+            taskContainer.innerHTML += taskComponentMaker.makeTaskResults(task);
         })
     }
 }
 
-export default tasksInjectDOM
+export default tasksDOMInjector
 

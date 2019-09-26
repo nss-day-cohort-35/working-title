@@ -1,59 +1,61 @@
 import authProcessor from "./auth/authProcessor";
 import newsProcessor from "./news/newsProcessor";
 import tasksProcessor from "./tasks/tasksProcessor";
-import authInjectDOM from "./auth/authDOMInjector";
+import authDOMInjector from "./auth/authDOMInjector";
+import messagesProcessor from "./messages/messagesProcessor.js"
+import friendsProcessor from "./friends/friendsProcessor.js"
 
 //this calls the login page for the user//
-authProcessor.Landing();
+authProcessor.landing();
 
 //this calls the nav buttons, NEED TO ADD IF/ELSE TO CHECK FOR SESSION STORAGE//
-// authInjectDOM.addNavtoDOM();
+// authDOMInjector.addNavtoDOM();
 
 console.log("Starting...");
 
 //these are event listeners that control the elements on the page they clear out all other containers then populate only what you wanted based on button clicked in navigation (ie controlled by processor.start) Will need to wrap these in IF/ELSE statements to check if user is logged in.//
 
 const navControls = {
-    enableNavButtons: () => {
+    navButtonEventListener: () => {
     //task nav button//
-    document.querySelector("#taskNavbutton").addEventListener("click", event => {
+    document.querySelector("#tasks-nav-button").addEventListener("click", event => {
         console.log("Task Navigational button has been called")
-            authInjectDOM.clearContainers();
+            authDOMInjector.clearContainers();
             tasksProcessor.start();
     })
     //home button but populate news//
-    document.querySelector("#homeNavbutton").addEventListener("click", event => {
+    document.querySelector("#home-nav-button").addEventListener("click", event => {
         console.log("home/news Navigational button has been called")
-            authInjectDOM.clearContainers();
+            authDOMInjector.clearContainers();
             newsProcessor.start();
     })
     //messages nav button//
-    document.querySelector("#messagesNavbutton").addEventListener("click", event => {
+    document.querySelector("#messages-nav-button").addEventListener("click", event => {
         console.log("messages Navigational button has been called")
-            authInjectDOM.clearContainers();
+            authDOMInjector.clearContainers();
             messagesProcessor.start();
     })
     //events nav button//
-    document.querySelector("#eventsNavbutton").addEventListener("click", event => {
+    document.querySelector("#events-nav-button").addEventListener("click", event => {
         console.log("events Navigational button has been called")
-            authInjectDOM.clearContainers();
+            authDOMInjector.clearContainers();
             eventsProcessor.start();
     })
     //friends nav button//
-    document.querySelector("#friendsNavbutton").addEventListener("click", event => {
+    document.querySelector("#friends-nav-button").addEventListener("click", event => {
         console.log("friends Navigational button has been called")
-            authInjectDOM.clearContainers();
+            authDOMInjector.clearContainers();
             friendsProcessor.start();
     })
     //logout nav button//
-    document.querySelector("#logoutNavbutton").addEventListener("click", event => {
+    document.querySelector("#logout-nav-button").addEventListener("click", event => {
         console.log("logout Navigational button has been called")
-            authInjectDOM.clearContainers();
+            authDOMInjector.clearContainers();
             //need to add something regarding logout, you will clear the session storage//
             // Remove saved data from sessionStorage
             sessionStorage.removeItem("activeUser");
-            document.querySelector("#navContainer").innerHTML = "";
-            authProcessor.Landing();
+            document.querySelector("#nav-container").innerHTML = "";
+            authProcessor.landing();
             console.log("Session Token for current logged in user is:" + sessionToken);
 })
 }}

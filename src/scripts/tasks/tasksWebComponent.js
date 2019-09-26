@@ -1,41 +1,41 @@
-const taskComponentMaker = {
-    makeTaskSection: function () {
+const tasksWebComponent = {
+    makeTaskInputForm: () => {
         return `
         <form id="task-form">
-        <h3 class="taskIdentifier">New Task</h3>
+        <h3>New Task</h3>
             <fieldset>
                 <label for="taskDate">Expected Completion Date</label>
-                <input type="date" name="taskDueDate" id="taskDueDate" required>
+                <input type="date" name="taskDueDate" id="tasks-date-input" required>
             </fieldset>
             <fieldset>
                 <label for="taskName">Task Name</label>
-                <input type="text" name="taskName" id="taskName" required>
+                <input type="text" name="taskName" id="tasks-name-input" required>
             </fieldset>
-            <fieldset class="inline">
-                <button type="button" id="taskSubmit">Submit Task</button>
-                <input type="hidden" id="taskIdEdit" value="" />
+            <fieldset>
+                <button type="button" id="tasks-submit-button">Submit Task</button>
+                <input type="hidden" id="tasks-hidden-input" value="" />
             </fieldset>
         </form>
-        <article id="taskResultSection"></article>
+        <section id="tasks-results-container"></section>
         `
     },
-    makeTaskResults: function (task) {
+    makeTaskResults: (task) => {
         console.log("Make Task Results have been called");
         return `
-        <section id="tasksResultContainer">
-            <div id="editTask--${task.id}">
+        <section>
+            <div>
                 <h3>${task.name}</h3>
             </div>
             <p>Expected Completion Date: ${task.date}</p>
             <fieldset>
                 <label for="taskComplete">Click if task is complete</label>
-                <input type="checkbox" name="taskComplete" id="taskComplete" value="${task.complete}">
+                <input type="checkbox" name="taskComplete" id="tasks-complete-checkbox" value="${task.complete}">
             </fieldset>
-            <button type="button" id="deleteTask--${task.id}">Delete Task</button>
-            <button type="button" id="editTask--${task.id}">Edit Task</button>
+            <button type="button" id="delete-task--${task.id}">Delete Task</button>
+            <button type="button" id="edit-task--${task.id}">Edit Task</button>
         </section>
         `
     }
 }
 
-export default taskComponentMaker;
+export default tasksWebComponent;
