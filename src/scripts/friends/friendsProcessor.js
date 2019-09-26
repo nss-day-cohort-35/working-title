@@ -3,21 +3,20 @@ import friendsApi from "./friendsAPImanager";
 import friendsDomInjector from "./friendsDOMInjector";
 import friendsListeners from "./friendsEventListeners";
 
+
+
 let friendsProcessor = {
 
     start: function () {
-        friendsDomInjector.set(friendsComponentMaker.makefriendsSection(), "#friendsContainer");
+        friendsDomInjector.set(friendsComponentMaker.makeFriendsSection(), "#friendsContainer");
         friendsListeners.makeButtons();
-        friendsApi.getEntries().then(entries => this.handlefriends(entries));
+        friendsApi.getEntries().then(entries => this.handleFriends(entries));
 
     },
 
-    handlefriends: function (list) {
+    handleFriends: function (list) {
 
-        console.log("Processing this list:");
-        console.log(list);
-
-        friendsDomInjector.erase("#friendsSection");
+        friendsDomInjector.erase("#friends-section");
 
         let userid = sessionStorage.getItem("activeUser");
 
@@ -28,18 +27,17 @@ let friendsProcessor = {
 
         for (let i = 0; i < list.length; i++) {
 
-            if (list[i].userId.toString() === userid.toString()) {//activeUser is the key
-                let object = friendsComponentMaker.makefriendsArticle(list[i]);
+            if (list[i].initiator.toString() === userid.toString()) {
+                let object = friendsComponentMaker.makeFriendsArticle(list[i]);
 
-                // friendsDomInjector.inject(Thing you want to insert, Where you want to insert it into)
-                friendsDomInjector.inject(object, "#friendsSection");
-            }//this space is reserved for checking all freind objects and populating as if it's from the usser
+                friendsDomInjector.inject(object, "#friends-section");
+            }
 
 
         }
 
         friendsListeners.makeModularButtons();
-        
+
 
 
     }

@@ -5,7 +5,7 @@ const friendsComponentMaker = {
         <h3 class = "friendsIdentifier">New Friend: Your Friend code: ${}</h3>
        
         <fieldset>
-            <label for="friendsName">Enter Freind's Email:</label>
+            <label for="friendsName">Enter Friend's Email:</label>
             <input type="textarea" name="friendsSummary" id="friendsSummary" required>
         </fieldset>
        
@@ -31,7 +31,7 @@ const friendsComponentMaker = {
         <div class="inline"> <h4>${object.user.userEmail}</h4> <button class="friendsDelete margin" value="${object.id}">Delete</button> </div>
         </section>
         
-        `; // The delete button stores the id of the friends, the edit button stores the id of the person. Since they itterate the same in a loop, i can easily call them both.
+        `;
     },
 
     makeUneditablefriendsArticle: function (object) {
@@ -43,7 +43,7 @@ const friendsComponentMaker = {
         <a href="${object.url}"><p>${object.url}</p></a>
         </section>
         
-        `; // The delete button stores the id of the friends, the edit button stores the id of the person. Since they itterate the same in a loop, i can easily call them both.
+        `;
     }
 
 }

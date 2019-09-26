@@ -1,13 +1,13 @@
 let friendsApi = {
 
     saveEntry: function (entry) {
-        return fetch("http://localhost:8088/friends", { // save to list "entries"
+        return fetch("http://localhost:8088/friends", {
             method: "POST",
             headers: {
-                //'Accept': 'application/json',
+
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(entry) // save the data to file
+            body: JSON.stringify(entry)
         })
 
     },
@@ -27,14 +27,14 @@ let friendsApi = {
 
     editEntry: function (entry, id) {
 
-        return fetch(`http://localhost:8088/friends/${id}`, { // save to list "entries"
-        method: "PUT",
-        headers: {
-            //'Accept': 'application/json',
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(entry) // save the data to file
-    })
+        return fetch(`http://localhost:8088/friends/${id}`, {
+            method: "PUT",
+            headers: {
+
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(entry)
+        })
     }
 }
 
