@@ -14,6 +14,7 @@ let tasksProcessor = {
         tasksAPIManager.getTask(sessionToken)
             .then(data => tasksDOMInjector.addResultsToDOM(data));
         tasksEventListeners.submitTasks();
+        tasksEventListeners.deleteEditTasks();
                 // document.querySelector(".newsIdentifier").innerHTML = "New News Entry"; // set the headline to tell user that they are no longer editing
                 // document.querySelector("#newsSubmit").innerHTML = "Submit"; // set the save button's text to reflect the no longer editing state
                 // document.querySelector("#idEdit").value = "";

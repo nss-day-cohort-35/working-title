@@ -6,7 +6,7 @@ import newsListeners from "./newsEventListeners.js";
 let newsProcessor = {
 
     start: function () {
-        newsDomInjector.set(newsComponentMaker.makeNewsSection(), "#newsContainer");
+        newsDomInjector.set(newsComponentMaker.makeNewsSection(), "#news-container");
         newsApi.getEntries().then(entries => this.handleNews(entries));
 
     },
