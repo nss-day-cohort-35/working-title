@@ -1,7 +1,7 @@
-import newsComponentMaker from "./newsWebComponent";
-import newsApi from "./newsAPImanager";
-import newsDomInjector from "./newsDOMInjector";
-import newsListeners from "./newsEventListeners";
+import newsComponentMaker from "./newsWebComponent.js";
+import newsApi from "./newsAPImanager.js";
+import newsDomInjector from "./newsDOMInjector.js";
+import newsListeners from "./newsEventListeners.js";
 
 let newsProcessor = {
 
@@ -31,18 +31,18 @@ let newsProcessor = {
 
         for (let i = 0; i < list.length; i++) {
 
-            if (list[i].userId.toString() === userid.toString()) {//activeUser is the key
+            if (list[i].userId.toString() === userid.toString()) { //activeUser is the key
                 let object = newsComponentMaker.makeNewsArticle(list[i]);
 
                 // newsDomInjector.inject(Thing you want to insert, Where you want to insert it into)
                 newsDomInjector.inject(object, "#newsSection");
-            }//this space is reserved for checking all freind objects and populating as if it's from the usser
+            } //this space is reserved for checking all freind objects and populating as if it's from the usser
 
 
         }
 
         newsListeners.makeModularButtons();
-        
+
 
 
     }
