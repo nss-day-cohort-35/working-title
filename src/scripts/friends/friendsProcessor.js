@@ -1,6 +1,8 @@
 let friendsProcessor = {
 
-    go: function () { }
+    start: function () {
+        document.querySelector("#friends-container").innerHTML = "Sorry you have no friends. :( but enjoy this good boi below!"
+    }
 
 }
 

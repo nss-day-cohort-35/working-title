@@ -3,6 +3,7 @@ import newsProcessor from "./news/newsProcessor";
 import tasksProcessor from "./tasks/tasksProcessor";
 import authDOMInjector from "./auth/authDOMInjector";
 import messagesProcessor from "./messages/messagesProcessor.js"
+import friendsProcessor from "./friends/friendsProcessor.js"
 
 //this calls the login page for the user//
 authProcessor.landing();
