@@ -33,7 +33,7 @@ let tasksEventListeners = {
         console.log("can you hear me delete button?")
         const resultsContainer = document.querySelector("#tasks-results-container").addEventListener("click", (event) => {
             if (event.target.id.startsWith("delete-task--")) {
-                // Extract donut id from the button's id attribute
+                // Extract id from the button's id attribute
                 console.log(event, event.target.id.split("--")[1])
                 document.querySelector("#tasks-results-container").innerHTML = "";
                 tasksAPIManager.deleteTask(event.target.id.split("--")[1])
@@ -41,7 +41,20 @@ let tasksEventListeners = {
                         tasksAPIManager.getTask(sessionToken)
                             .then(data => tasksDOMInjector.addResultsToDOM(data));
                     })
-            } else if (event.target.id.startsWith("#edit-task--")) {
+            } else if (event.target.id.startsWith("edit-task--")) {
+                console.log("the edit button has been called")
+                //this is the querying the containers for the form at top of the page and setting them to the values from json
+                // let data = sessionStorage.getItem("activeUser")
+                let taskId = event.target.id.split("--")[1]
+                const editForm = (taskId) => {
+                    let editObject = {
+                    editUserId: sessionToken,
+                    editId: document.querySelector("#tasks-hidden-input"),
+                    editDate: document.querySelector("#tasks-date-input"),
+                    editName: document.querySelector("#tasks-name-input")
+                }
+                return editObject
+            }
                 console.log("edit", event.target.id.split("--")[1])
                 editForm(event.target.id.split("--")[1])
                 //this queries the json based on the ID and retrieves one task and stores the values into the following below to be passed to the form//
@@ -51,13 +64,6 @@ let tasksEventListeners = {
                         editId.value = response.Id;
                         editDate.value = response.date;
                         editName.value = response.name;
-                        //this is the querying the containers for the form at top of the page and setting them to the values from json
-                        const editForm = (taskId) => {
-                            let editUserId = sessionToken
-                            let editId = document.querySelector("#tasks-hidden-input")
-                            let editDate = document.querySelector("#tasks-date-input")
-                            let editName = document.querySelector("#tasks-name-input")
-                        }
                     })
             }
         })
