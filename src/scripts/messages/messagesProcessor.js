@@ -1,22 +1,19 @@
 import messagesComponentMaker from "./messagesWebComponent.js";
-import messagesApi from "./messagesAPImanager.js";
+import messagesAPIManager from "./messagesAPIManager.js";
 import messagesDomInjector from "./messagesDOMInjector.js";
-import messagesListeners from "./messagesEventListeners.js";
+import messagesEventListeners from "./messagesEventListeners.js";
+
 
 let messagesProcessor = {
 
-    start: function () {
+    start: () => {
         messagesDomInjector.set(messagesComponentMaker.makeMessagesSection(), "#messagesContainer");
-        messagesApi.getEntries().then(entries => this.handleMessages(entries));
+        messagesEventListeners.submitButton()
+        messagesAPIManager.getMessages().then(response => this.handleMessages());
 
     },
 
-    handleMessages: function (list) {
-
-        document.querySelector("#timeoutVar2").value = "!";
-
-        console.log("Processing this list:");
-        console.log(list);
+    handleMessages: (list) => {
 
         messagesDomInjector.erase("#messagesSection");
 
@@ -32,20 +29,10 @@ let messagesProcessor = {
 
         for (let i = 0; i < list.length; i++) {
 
-            if (list[i].userId.toString() === userId.toString()) { //activeUser is the key
-                let object = messagesComponentMaker.makeMessagesArticle(list[i]);
-
-                // messagesDomInjector.inject(Thing you want to insert, Where you want to insert it into)
-                messagesDomInjector.inject(object, "#messagesSection");
-            } //this space is reserved for checking all friend objects and populating as if it's from the user
-
-
+            let object = messagesComponentMaker.makeMessagesArticle(list[i]);
+            messagesDomInjector.inject(object, "#messagesSection");
         }
-
-        messagesListeners.makeButtons();
-        document.querySelector("#timeoutVar2").value = "";
-
-
+        messagesEventListeners.deleteEditButtons();
     }
 
 }

@@ -1,43 +1,49 @@
-let messagesApi = {
 
-    saveEntry: function (entry) {
-        return fetch("http://localhost:8088/messages", { // save to list "entries"
+const url = "http://localhost:8088";
+
+const messagesAPIManager = {
+
+    saveMessage: (message) => {
+        return fetch(`${url}/messages`, {
             method: "POST",
             headers: {
-                //'Accept': 'application/json',
-                "Content-Type": "application/json"
+                "content-type": "application/json"
             },
-            body: JSON.stringify(entry) // save the data to file
+            body: JSON.stringify(message)
         })
-
     },
-
-    getEntries: function () {
-        console.log("Getting entries");
-        return fetch("http://localhost:8088/messages?_expand=user").then(entrieslist => entrieslist.json())
-
+    getFriends: (userId) => {
+        return fetch(`${url}/friends/?currentUserId=${userId}&_expand=user`)
+            .then(r => r.json())
     },
-
-
-    removeEntry: function (remove) {
-
-        return fetch(`http://localhost:8088/messages?_expand=user${remove}`, {
+    postCreateFriendship: (friendship) => {
+        return fetch(`${url}/friends`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(friendship)
+        })
+    },
+    getMessages: () => {
+        return fetch(`${url}/messages?_expand=user`)
+            .then(r => r.json())
+    },
+    deleteMessage: (Id) => {
+        return fetch(`${url}/messages/${Id}`, {
             method: "DELETE"
         })
-
     },
-
-    editEntry: function (entry, id) {
-
-        return fetch(`http://localhost:8088/messages/${id}`, { // save to list "entries"
+    editMessage: (message, Id) => {
+        return fetch(`${url}/messages/${Id}`, {
             method: "PUT",
             headers: {
-                //'Accept': 'application/json',
-                "Content-Type": "application/json"
+                "content-type": "application/json"
             },
-            body: JSON.stringify(entry) // save the data to file
+            body: JSON.stringify(message)
         })
     }
 }
 
-export default messagesApi;
+
+export default messagesAPIManager;

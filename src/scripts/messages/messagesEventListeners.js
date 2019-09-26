@@ -1,35 +1,29 @@
-import messagesApi from "./messagesAPImanager.js";
+import messagesAPIManager from "./messagesAPIManager.js";
 
 import messagesDomInjector from "./messagesDomInjector.js";
 
 import messagesProcessor from "./messagesProcessor.js";
 
 import messagesComponentMaker from "./messagesWebComponent.js";
-import moment from "moment"
-
-let messagesListeners = {
-  makeButtons: function () {
-    document.querySelector("#messagesSubmit").addEventListener("click", function (e) {
+import moment from "moment";
+let sessionToken = sessionStorage.getItem("activeUser");
+let messagesEventListeners = {
+  submitButton: () => {
+    document.querySelector("#messages-submit-button").addEventListener("click", e => {
       e.preventDefault();
-      if (
-        document.querySelector("#idMessagesEdit").value === "" &&
-        document.querySelector("#timeoutVar2").value === ""
-      ) {
+      document.querySelector("#messagesText").value = "";
+      if (document.querySelector("#idMessagesEdit").value === "") {
         let submitData = {
           date: moment().format("lll"),
-          userId: sessionStorage.getItem("activeUser"),
+          userId: sessionToken,
           text: document.querySelector("#messagesText").value
         };
 
-        messagesApi.saveEntry(submitData).then(function (uselessdata) {
-          messagesApi
-            .getEntries()
-            .then(data => messagesProcessor.handleMessages(data));
+        messagesAPIManager.saveMessage(submitData).then(response => {
+          messagesAPIManager
+            .getEntries(response)
+            .then(response => messagesProcessor.handleMessages(response));
         });
-        //note to self: .then(randomvarname => unrelatedfunction(lol)) does not work, have to use
-        // .then(function(randomvarname) {unrelatedfunction(lol)}) instead. Put this in the capstone site's data.
-
-        //newsDomInjector.inject(newsComponentMaker.makeUneditableNewsArticle(sumbitdata) ,"#newsSection");
       } else {
         let submitData = {
           id: document.querySelector("#idMessagesEdit").value,
@@ -39,67 +33,42 @@ let messagesListeners = {
         };
 
         let savedId = document.querySelector("#idMessagesEdit").value;
-
-        //   document.querySelector(".messagesIdentifier").innerHTML =
-        //     "New News Entry"; // set the headline to tell user that they are no longer editing
-        //   document.querySelector("#newsSubmit").innerHTML = "Submit"; // set the save button's text to reflect the no longer editing state
-        //   document.querySelector("#idEdit").value = "";
-
-        messagesApi
-          .editEntry(submitData, savedId)
-          .then(function (uselessData) {
-            messagesApi
-              .getEntries()
-              .then(data => messagesProcessor.handleMessages(data));
-          });
-
-        //newsDomInjector.replace(`#section${savedid}`,newsComponentMaker.makeUneditableNewsArticle(sumbitdata));
+        messagesAPIManager.editMessage(submitData, savedId).then(response => {
+          messagesAPIManager
+            .getEntries(response)
+            .then(response => messagesProcessor.handleMessages(response));
+        });
       }
     });
+  },
+  deleteEditButtons: () => {
+    let deleteArray = document.querySelectorAll("#messages-delete-button");
+    console.log(deleteArray);
+    let editArray = document.querySelectorAll("#messages-edit-button");
+    console.log(editArray);
 
-    let delList = document.querySelectorAll(".messagesDelete");
-    console.log(delList);
-    let editList = document.querySelectorAll(".messagesEdit");
-    console.log(editList);
-
-    for (let i = 0; i < delList.length; i++) {
-      delList[i].addEventListener("click", event => {
-        console.log("Deleting:");
-        console.log(delList[i].value);
-
-        messagesApi.removeEntry(delList[i].value).then(function (uselessdata) {
-          messagesApi
-            .getEntries()
-            .then(data => messagesProcessor.handleMessages(data));
+    for (let i = 0; i < deleteArray.length; i++) {
+      deleteArray[i].addEventListener("click", event => {
+        messagesAPIManager.removeMessage(deleteArray[i].value).then(response => {
+          messagesAPIManager.getEntries(response)
+            .then(response => messagesProcessor.handleMessages(response));
         });
       });
 
-      editList[i].addEventListener("click", event => {
-        if (sessionStorage.getItem("activeUser") === editList[i].value) {
-          this.editEntry(delList[i].value);
+      editArray[i].addEventListener("click", event => {
+        if (sessionStorage.getItem("activeUser") === editArray[i].value) {
+          this.editMessage(editArray[i].value);
         }
       });
     }
   },
 
-  editEntry: function (id) {
-    // document.querySelector("#messagesDate").value = document.querySelector(
-    //   `#newsDate${id}`
-    // ).innerHTML;
-    // document.querySelector("#messagesTitle").value = document.querySelector(
-    //   `#newsTitle${id}`
-    // ).innerHTML;
-    document.querySelector("#messagesText").value = document.querySelector(
-      `#messagesText${id}`
-    ).innerHTML;
-    // document.querySelector("#newsUrl").value = document.querySelector(
-    //   `#newsUrl${id}`
-    // ).innerHTML;
-
+  editMessage: (id) => {
+    document.querySelector("#messagesText").value = document.querySelector(`#messagesText${id}`).innerHTML;
     document.querySelector("#idMessagesEdit").value = id; // set hidden value to store of what is being edited
     document.querySelector(".messagesIdentifier").innerHTML = "Edit News Entry"; // set the headline to tell user that they are editing
     document.querySelector("#messagesSubmit").innerHTML = "Save Changes"; // set the save button's text to reflect the editing state
   }
 };
 
-export default messagesListeners;
+export default messagesEventListeners;
