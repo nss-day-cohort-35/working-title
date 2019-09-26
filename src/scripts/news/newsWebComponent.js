@@ -1,66 +1,68 @@
-const newsComponentMaker = {
+/*  This is newsComponentMaker. It makes html, sometimes from data received as parameters.
+Everything that that is targeted in other files have ids or classes. The id and class
+names are important as they are used by other code. Do not change them unless you talk with the team.
+This module only returns things, and does not edit anything directly.
+
+newsComponentMaker.makeNewsSection() It should only be called once. Makes a input form for the new area of the site.
+All the input fields have unique ids.
+
+newsComponentMaker.makeNewsArticle(object) This makes a html element with the object passed to it. The object must be
+formated correctly.
+
+
+
+*/
+
+const newsWebComponent = {
     makeNewsSection: function () {
         return `
         <form id="news-form">
-        <h3 class = "newsIdentifier">New News Entry</h3>
+        <h3 class="newsIdentifier">New News Entry</h3>
         <fieldset>
             <label for="newsDate">Date of entry</label>
-            <input type="date" name="newsDate" id="newsDate" required>
+            <input type="date" name="newsDate" id="news-date-input" required>
         </fieldset>
         <fieldset>
             <label for="newsTitle">Title</label>
-            <input type="text" name="newsTitle" id="newsTitle">
+            <input type="text" name="newsTitle" id="news-title-input" required>
         </fieldset>
         <fieldset>
             <label for="newsSummary">Summary</label>
-            <input type="textarea" name="newsSummary" id="newsSummary" required>
+            <input type="textarea" name="newsSummary" id="news-summary-input" required>
         </fieldset>
         <fieldset>
             <label for="newsUrl">Url link</label>
-            <input type="text" name="newsUrl" id="newsUrl">
+            <input type="text" name="newsUrl" id="news-url-input">
         </fieldset>
        
         <fieldset class="inline">
 
-            <button id="newsSubmit">Submit</button>
-            <input type="reset" value="Reset"/>
-            <input type="hidden" id="idEdit" value="" />
+            <button id="news-submit-button">Submit</button>
+            <input type="hidden" id="news-id-edit-value" value="" />
 
 
         </fieldset>
     </form>
 
-    <article id = "newsSection">
+    <article id = "news-section">
     </article>
         
         `;
     },
 
     makeNewsArticle: function (object) {
-        return `<section id="section${object.id}">
+        return `<section id="section--${object.id}">
         <input type="hidden" class="newsIdHolder" value="${object.id}" />
         <input type="hidden" class="newsuserIdHolder" value="${object.userId}" />
-        <div class="inline"><h4 id="newsTitle${object.id}" class = "margin">${object.title}</h4> <h5 id="newsDate${object.id}">${object.date}</h5></div>
-        <p id = "newsSummary${object.id}">${object.summary}</p>
-        <a href="${object.url}"><p id="newsUrl${object.id}">${object.url}</p></a>
-        <div><button class="newsDelete margin" value="${object.id}">Delete</button><button class="newsEdit" value="${object.userId}">Edit</button></div>
-        </section>
+        <div class="inline"><h4 id="news-title--${object.id}" class = "margin">${object.title}</h4> <h5 id="news-date--${object.id}">${object.date}</h5></div>
+        <p id = "news-summary--${object.id}">${object.summary}</p>
+        <a href="${object.url}"><p id="news-url--${object.id}">${object.url}</p></a>
+        <div><button class="newsDeleteButton margin" value="${object.id}">Delete</button><button class="newsEditButton" value="${object.userId}">Edit</button></div>
+        </section> 
         
-        `; // The delete button stores the id of the news, the edit button stores the id of the person. Since they itterate the same in a loop, i can easily call them both.
-    },
-
-    makeUneditableNewsArticle: function (object) {
-        return `<section>
-        <input type="hidden" class="newsIdHolder" value="" />
-        <input type="hidden" class="newsuserIdHolder" value="" />
-        <div class="inline"><h4 class = "margin">${object.title}</h4> <h5>${object.date}</h5></div>
-        <p>${object.summary}</p>
-        <a href="${object.url}"><p>${object.url}</p></a>
-        </section>
-        
-        `; // The delete button stores the id of the news, the edit button stores the id of the person. Since they itterate the same in a loop, i can easily call them both.
+        `;
     }
 
 }
 
-export default newsComponentMaker;
+export default newsWebComponent;

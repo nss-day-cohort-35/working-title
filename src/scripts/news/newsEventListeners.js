@@ -1,68 +1,84 @@
-import newsApi from "./newsAPImanager";
+import newsApi from "./newsAPIManager";
 
 
-import newsDomInjector from "./newsDomInjector";
+
 
 import newsProcessor from "./newsProcessor";
+import newsApiManager from "./newsAPIManager";
 
-import newsComponentMaker from "./newsWebComponent";
+/* This component deals with giving elements functionality.
+There are three methods, each of which you want to use like so:
+
+newsListeners.MakeButtonListeners() Call this only once, when the initial page has been loaded.
+It adds functionality to the Submit button, while also removing the default functionality of a button in a form. (#1)
+It functions like a New Entry button and calls the method to save a new entry when it does not have a
+id stored in the "news-id-edit-value" location. When it does, it inputs the correct id into the object, then calls the
+method to save changes to an existing object. It then reverts all the changes made via editing back to normal. (#2)
+
+newsListeners.makeModularButtonListeners() Call this when the news feed changes. This gives functionality to the Edit and Delete
+Buttons found on the news elements. The function uses a loop (#3) to find all relevant buttons. Since Edit and delete buttons always
+come in pairs, delblist[3] will be the sibling of editblist[3] and so on. The delete button stores the Id for the
+news component it is a part of, and the edit button stores the UserId of the user that created it.
+The delete buttons passes the id of the news entry to be deleted to the Api handler, then it reloads the news entries. (#4)
+The edit buttons call newsListeners.editEntry and pass it the ID of the news entry it is editing, gained from it's sibling
+Delete Button's Value.
+
+newsListeners.editEntry(id) Should not be called other than from newsListeners.makeModularButtonListeners(). This gets all the values
+of the news entry that has the id that was entered into the function. It puts that data into the input form. It also changes the
+input form to show that the user is editing a news entry. It also saves the id of the news entry in a hidden
+input that is located inside the input form.
 
 
-let newsListeners = {
+*/
 
-    makeButtons: function () {
-        document.querySelector("#newsSubmit").addEventListener("click", function (e) {
+let newsEventListeners = {
 
-            e.preventDefault();
+    makeButtonListeners: function () {
+        document.querySelector("#news-submit-button").addEventListener("click", function (event) {
 
-            console.log("Submitting");
-            if (document.querySelector("#idEdit").value === "") {
-                // this checks if the storage for the editing id is empty, plus if the fecth is done (becuase of bug)
+            event.preventDefault(); // #1
 
-                console.log("Saving!");
+            if (document.querySelector("#news-id-edit-value").value === "") {
 
-                // this is for new entries
+
+
                 let sumbitdata = {
-                    date: document.querySelector("#newsDate").value,
+                    date: document.querySelector("#news-date-input").value,
                     userId: sessionStorage.getItem("activeUser"),
-                    title: document.querySelector("#newsTitle").value,
-                    summary: document.querySelector("#newsSummary").value,
-                    url: document.querySelector("#newsUrl").value,
+                    title: document.querySelector("#news-title-input").value,
+                    summary: document.querySelector("#news-summary-input").value,
+                    url: document.querySelector("#news-url-input").value,
 
                 }
 
-                newsApi.saveEntry(sumbitdata).then(function (uselessdata) { newsApi.getEntries().then(data => newsProcessor.handleNews(data)) });
-                //note to self: .then(randomvarname => unrelatedfunction(lol)) does not work, have to use
-                // .then(function(randomvarname) {unrelatedfunction(lol)}) instead. Put this in the capstone site's data.
 
-                //newsDomInjector.inject(newsComponentMaker.makeUneditableNewsArticle(sumbitdata) ,"#newsSection");
+                newsApi.saveEntry(sumbitdata)
+                    .then(() => newsApiManager.getEntries())
+                    .then(data => newsProcessor.handleNews(data))
 
             } else {
 
-                console.log("Saving!");
-
-                // this is for editing
                 let sumbitdata = {
-                    date: document.querySelector("#newsDate").value,
+                    date: document.querySelector("#news-date-input").value,
                     userId: sessionStorage.getItem("activeUser"),
-                    title: document.querySelector("#newsTitle").value,
-                    summary: document.querySelector("#newsSummary").value,
-                    url: document.querySelector("#newsUrl").value,
-                    id: document.querySelector("#idEdit").value
+                    title: document.querySelector("#news-title-input").value,
+                    summary: document.querySelector("#news-summary-input").value,
+                    url: document.querySelector("#news-url-input").value,
+                    id: document.querySelector("#news-id-edit-value").value
 
                 }
 
-                let savedid = document.querySelector("#idEdit").value;
+                let savedid = document.querySelector("#news-id-edit-value").value;
 
-                document.querySelector(".newsIdentifier").innerHTML = "New News Entry"; // set the headline to tell user that they are no longer editing
-                document.querySelector("#newsSubmit").innerHTML = "Submit"; // set the save button's text to reflect the no longer editing state
-                document.querySelector("#idEdit").value = "";
+                document.querySelector(".newsIdentifier").innerHTML = "New News Entry";
+                document.querySelector("#news-submit-button").innerHTML = "Submit"; // #2
+                document.querySelector("#news-id-edit-value").value = "";
 
-                newsApi.editEntry(sumbitdata, savedid).then(function (uselessdata) { newsApi.getEntries().then(data => newsProcessor.handleNews(data)) });
+                newsApi.editEntry(sumbitdata, savedid)
+                    .then(() => newsApiManager.getEntries())
+                    .then(data => newsProcessor.handleNews(data))
 
 
-
-                //newsDomInjector.replace(`#section${savedid}`,newsComponentMaker.makeUneditableNewsArticle(sumbitdata));
 
 
             }
@@ -73,59 +89,51 @@ let newsListeners = {
     },
 
 
-    makeModularButtons: function () {
+    makeModularButtonListeners: function () {
 
 
-        let dellist = document.querySelectorAll(".newsDelete");
-        console.log(dellist);
-        let editlist = document.querySelectorAll(".newsEdit");
-        console.log(editlist);
+        let delblist = document.querySelectorAll(".newsDeleteButton");
+        let editblist = document.querySelectorAll(".newsEditButton");
 
-        for (let i = 0; i < dellist.length; i++) {
+        for (let i = 0; i < delblist.length; i++) { // #3
 
-            dellist[i].addEventListener("click", event => {
+            delblist[i].addEventListener("click", event => {
 
-                console.log("Deleting:");
-                console.log(dellist[i].value);
-
-                newsApi.removeEntry(dellist[i].value).then(function (uselessdata) { newsApi.getEntries().then(data => newsProcessor.handleNews(data)) })
+                newsApiManager.removeEntry(delblist[i].value) // #4
+                    .then(() => newsApiManager.getEntries())
+                    .then(data => newsProcessor.handleNews(data))
 
 
 
 
             })
 
-            editlist[i].addEventListener("click", event => {
+            editblist[i].addEventListener("click", event => {
 
-                if (sessionStorage.getItem("activeUser") === editlist[i].value) {
-                    this.editEntry(dellist[i].value);
+                if (sessionStorage.getItem("activeUser") === editblist[i].value) {
+                    this.editEntry(delblist[i].value);
                 }
 
 
             })
 
         }
-
-
-
-
-
     },
 
     editEntry: function (id) {
 
-        document.querySelector("#newsDate").value = document.querySelector(`#newsDate${id}`).innerHTML;
-        document.querySelector("#newsTitle").value = document.querySelector(`#newsTitle${id}`).innerHTML;
-        document.querySelector("#newsSummary").value = document.querySelector(`#newsSummary${id}`).innerHTML;
-        document.querySelector("#newsUrl").value = document.querySelector(`#newsUrl${id}`).innerHTML;
+        document.querySelector("#news-date-input").value = document.querySelector(`#news-date--${id}`).innerHTML;
+        document.querySelector("#news-title-input").value = document.querySelector(`#news-title--${id}`).innerHTML;
+        document.querySelector("#news-summary-input").value = document.querySelector(`#news-summary--${id}`).innerHTML;
+        document.querySelector("#news-url-input").value = document.querySelector(`#news-url--${id}`).innerHTML;
 
-        document.querySelector("#idEdit").value = id; // set hidden value to store if of what is being edited
+        document.querySelector("#news-id-edit-value").value = id; // set hidden value to store if of what is being edited
         document.querySelector(".newsIdentifier").innerHTML = "Edit News Entry"; // set the headline to tell user that they are editing
-        document.querySelector("#newsSubmit").innerHTML = "Save Changes"; // set the save button's text to reflect the editing state
+        document.querySelector("#news-submit-button").innerHTML = "Save Changes"; // set the save button's text to reflect the editing state
     }
 
 
 }
 
-export default newsListeners;
+export default newsEventListeners;
 
